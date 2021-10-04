@@ -8,6 +8,9 @@ will produce output identical to `expected_output.txt`.
 You can test your work by modifying the executable file called `hangman` and
 then running `./completeness_test`.
 
+When you write your code, don't worry if the code is "good" or if it adheres to object-oriented programming principles.
+All that matters is if it passes the `completeness_test`.
+
 ## How to submit your solution
 
 If you're interested in having me refactor your solution to be more object-oriented (plus any other improvements that I see can be made), do the following:
