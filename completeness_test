@@ -1,0 +1,12 @@
+#!/bin/bash
+
+TMP_FILENAME=/tmp/hangman_output
+./hangman input.txt > $TMP_FILENAME
+diff $TMP_FILENAME expected_output.txt
+
+if [ $? == 0 ]
+then
+  echo "Your program's output matches the expected output!"
+else
+  echo "Your program's output does not match the expected output. See above diff."
+fi
