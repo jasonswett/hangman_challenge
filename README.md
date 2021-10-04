@@ -13,7 +13,10 @@ then running `./completeness_test`.
 If you're interested in having me refactor your solution to be more object-oriented (plus any other improvements that I see can be made), do the following:
 
 1. Clone this repo (or fork it if you know how)
-2. Send an email to jason@codewithjason.com with a link to your solution
+2. Complete the solution using the instructions above
+3. Send an email to jason@codewithjason.com with a link to your solution
+
+After you send me your code, and provided that your solution works and I have enough time, I'll send you back my refactored version.
 
 ## Important note
 
