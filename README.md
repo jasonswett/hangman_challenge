@@ -1,7 +1,22 @@
 # Hangman challenge
 
+## The challenge
+
 The point of this exercise is to see if you can
 write a program which, using `input.txt`,
 will produce output identical to `expected_output.txt`.
 You can test your work by modifying the executable file called `hangman` and
 then running `./completeness_test`.
+
+## How to submit your solution
+
+If you're interested in having me refactor your solution to be more object-oriented (plus any other improvements that I see can be made), do the following:
+
+1. Clone this repo (or fork it if you know how)
+2. Send an email to jason@codewithjason.com with a link to your solution
+
+## Important note
+
+Part of the reason I'm willing to do this is so that I can have some "before" and "after" code examples for my books and blog posts. By submitting your solution, you give me permission to use your code in my materials.
+
+Thanks in advance for participating.
