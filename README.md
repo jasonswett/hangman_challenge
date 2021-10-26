@@ -1,4 +1,4 @@
-# Hangman challenge
+# Hangman Challenge
 
 ## The challenge
 
@@ -17,7 +17,7 @@ You can use any language you want as long as it supports OOP.
 
 If you're interested in having me refactor your solution to be more object-oriented (plus any other improvements that I see can be made), do the following:
 
-1. Clone this repo (or fork it if you know how)
+1. Clone this repo (or fork this repo if you know how)
 2. Complete the solution using the instructions above
 3. Send an email to jason@codewithjason.com with a link to your solution
 
