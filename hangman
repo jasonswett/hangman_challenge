@@ -18,8 +18,8 @@ class Game
   def status
     Status.new(
       cloaked_word: cloaked_word,
-      life_left: life_left,
       incorrect_guesses: @incorrect_guesses,
+      life_left: life_left,
     ).to_s
   end
 
@@ -42,24 +42,29 @@ class Status
   end
 
   def to_s
-    output_items = [@cloaked_word]
-
-    if player_has_won?
-      output_items << "YOU WIN!"
-    elsif player_has_lost?
-      output_items << "YOU LOSE!"
-    else
-      output_items << "life left: #{@life_left}"
-
-      if @incorrect_guesses.any?
-        output_items << "incorrect guesses: #{@incorrect_guesses.join("")}"
-      end
-    end
-
-    output_items.join(" ")
+    "#{@cloaked_word} #{message}"
   end
 
   private
+
+  def message
+    if player_has_won?
+      "YOU WIN!"
+    elsif player_has_lost?
+      "YOU LOSE!"
+    else
+      non_terminal_message
+    end
+  end
+
+  def non_terminal_message
+    ["life left: #{@life_left}", incorrect_guess_list].compact.join(" ")
+  end
+
+  def incorrect_guess_list
+    return unless @incorrect_guesses.any?
+    "incorrect guesses: #{@incorrect_guesses.join("")}"
+  end
 
   def player_has_won?
     !@cloaked_word.include?("_")
@@ -102,7 +107,6 @@ commands.each do |command|
 
   if command.length > 1
     game = Game.new(Word.new(command))
-    correct_guesses = []
   else
     guess = command
 
