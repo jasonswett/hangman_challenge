@@ -16,21 +16,11 @@ class Game
   end
 
   def status
-    output_items = [cloaked_word]
-
-    if player_has_won?
-      output_items << "YOU WIN!"
-    elsif player_has_lost?
-      output_items << "YOU LOSE!"
-    else
-      output_items << "life left: #{life_left}"
-
-      if incorrect_guesses.any?
-        output_items << "incorrect guesses: #{incorrect_guesses.join("")}"
-      end
-    end
-
-    output_items.join(" ")
+    Status.new(
+      cloaked_word: cloaked_word,
+      life_left: life_left,
+      incorrect_guesses: @incorrect_guesses,
+    ).to_s
   end
 
   private
@@ -42,13 +32,41 @@ class Game
   def life_left
     6 - incorrect_guesses.count
   end
+end
+
+class Status
+  def initialize(cloaked_word:, life_left:, incorrect_guesses:)
+    @cloaked_word = cloaked_word
+    @life_left = life_left
+    @incorrect_guesses = incorrect_guesses
+  end
+
+  def to_s
+    output_items = [@cloaked_word]
+
+    if player_has_won?
+      output_items << "YOU WIN!"
+    elsif player_has_lost?
+      output_items << "YOU LOSE!"
+    else
+      output_items << "life left: #{@life_left}"
+
+      if @incorrect_guesses.any?
+        output_items << "incorrect guesses: #{@incorrect_guesses.join("")}"
+      end
+    end
+
+    output_items.join(" ")
+  end
+
+  private
 
   def player_has_won?
-    !cloaked_word.include?("_")
+    !@cloaked_word.include?("_")
   end
 
   def player_has_lost?
-    life_left <= 0
+    @life_left <= 0
   end
 end
 
