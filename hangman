@@ -15,6 +15,14 @@ class Game
     @incorrect_guesses = []
   end
 
+  def submit_guess(guess)
+    if @word.contains?(guess)
+      @correct_guesses << guess
+    else
+      @incorrect_guesses << guess
+    end
+  end
+
   def status
     Status.new(
       cloaked_word: cloaked_word,
@@ -108,13 +116,7 @@ commands.each do |command|
   if command.length > 1
     game = Game.new(Word.new(command))
   else
-    guess = command
-
-    if game.word.contains?(guess)
-      game.correct_guesses << guess
-    else
-      game.incorrect_guesses << guess
-    end
+    game.submit_guess(command)
   end
 
   puts game.status
