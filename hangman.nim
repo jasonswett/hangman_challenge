@@ -17,23 +17,23 @@ template loop(statements: untyped) =
 
 # Play a single session of Hangman game using specified word
 proc game(hiddenWord: Word) =
-  const MAX_GUESSES = 6
+  const 
+    HIDDEN_CHARACTER = '_'
+    MAX_GUESSES = 6
 
   type
     Guess = char
     State = enum PLAYING LOSE WIN
 
   var 
-    filledWord = "-".repeat hiddenWord.len
+    filledWord = HIDDEN_CHARACTER.repeat hiddenWord.len
     guess: Guess
     guessesLeft = MAX_GUESSES
     incorrectGuesses: Word 
     state = Playing
 
-  # Obtain next of limited character guess
-  template getGuess(): char = 
-    guessesLeft.dec
-    lcInput[0]
+  # Obtain next character guess
+  template getGuess(): char = lcInput[0]
 
   # Display current status
   template showStatus() =
@@ -45,7 +45,7 @@ proc game(hiddenWord: Word) =
   # Show final status of game
   template finalSummary() = 
     if guessesLeft == 0: state = LOSE
-    echo "You ", state, '!'
+    echo filledWord & " YOU ", state, '!'
 
   # wining status
   template won(): bool = state == WIN
@@ -58,7 +58,7 @@ proc game(hiddenWord: Word) =
 
     # Check if won
     template checkWin() = 
-      if filledWord.count('-') == 0: state = WIN 
+      if filledWord.count(HIDDEN_CHARACTER) == 0: state = WIN 
 
     # Maintain history of wrong guesses
     template recordIncorrectGuess() =
@@ -71,7 +71,9 @@ proc game(hiddenWord: Word) =
       changes.inc
       filledWord[position] = guess
       
-    if changes == 0: recordIncorrectGuess
+    if changes == 0: 
+      recordIncorrectGuess
+      guessesLeft.dec
     checkWin
       
   while guessesLeft > 0:
@@ -84,11 +86,16 @@ proc game(hiddenWord: Word) =
 # Get next hidden word
 template getWord(): Word = lcInput
 
+# Ignore blank line between games 
+template ignoreBlankLine() = 
+  let skip = getWord
+
 # Play one or more games (terminated by EOF or blank line)
 proc play() =
   loop:
-    let word = getWord()
-    if word == "": break
+    let word = getWord
+    if word.isEmptyOrWhitespace: break
     game word
+    let skip = getWord
 
 if isMainModule: play()

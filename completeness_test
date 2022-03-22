@@ -1,7 +1,8 @@
 #!/bin/bash
 
 TMP_FILENAME=/tmp/hangman_output
-./hangman input.txt > $TMP_FILENAME
+# ./hangman input.txt > $TMP_FILENAME
+nim r hangman < input.txt > $TMP_FILENAME
 diff $TMP_FILENAME expected_output.txt
 
 if [ $? == 0 ]
